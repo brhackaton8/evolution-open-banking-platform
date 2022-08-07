@@ -24,6 +24,10 @@ public class AuthEntity {
 
     private Status status = Status.UNVERIFIED;
 
+    private boolean informationSent;
+
+    private String fullName;
+
     @CreationTimestamp
     private Date creationDate;
 

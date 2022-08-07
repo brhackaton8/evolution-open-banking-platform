@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface AuthRepo extends JpaRepository<AuthEntity, Long> {
 
-    List<AuthEntity> findByStatus(Status verified);
+    List<AuthEntity> findByStatusAndInformationSent(Status status, boolean informationSent);
 }

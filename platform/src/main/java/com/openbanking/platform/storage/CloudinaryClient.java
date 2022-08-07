@@ -15,8 +15,9 @@ public class CloudinaryClient {
             "api_key", "244426132456294",
             "api_secret", "1r8zMRLwF-gOVcsgWnNbLBaf5Yc"));
 
-    public String uploadVideo() throws IOException {
-        Map upload = cloudinary.uploader().upload(new File("/Users/shamistanhuseynov/Desktop/evolution-open-banking-platform/platform/src/main/resources/videos/filename.avi"), ObjectUtils.asMap("resource_type", "video"));
+    public String uploadVideo(String path) throws IOException {
+
+        Map upload = cloudinary.uploader().upload(new File(path), ObjectUtils.asMap("resource_type", "video"));
         return (String) upload.get("secure_url");
 
     }
