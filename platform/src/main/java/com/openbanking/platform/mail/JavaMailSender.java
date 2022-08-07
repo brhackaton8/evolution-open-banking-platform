@@ -27,7 +27,7 @@ public class JavaMailSender {
             }
         });
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("s.huseynov@ufaz.az", "Testing"));
+        msg.setFrom(new InternetAddress("s.huseynov@ufaz.az", "SMART Bankçılıq"));
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailTo));
         msg.setSubject(mailSubject);
         msg.setSentDate(new Date());
