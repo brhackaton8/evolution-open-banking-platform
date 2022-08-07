@@ -1,4 +1,5 @@
-from flask import Flask, render_template, Response
+import flask
+from flask import Flask, render_template, Response, redirect, url_for
 import cv2
 
 from datetime import datetime
@@ -16,8 +17,11 @@ result = cv2.VideoWriter(
         cv2.VideoWriter_fourcc(*'MJPG'),
         10, size)
 
+isExceeded = False
 def generate_frames():
+    cnt = 0
     while True:
+        cnt = cnt + 1
         ## read the camera frame
         success, frame = camera.read()
         result.write(frame)
@@ -28,19 +32,22 @@ def generate_frames():
             frame = buffer.tobytes()
 
 
-
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        print(cnt)
+        if(cnt > 200):
+            print(cnt)
+            isExceeded = True
+            break
 
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
 
 @app.route('/video')
 def video():
-    # saveVideo()
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
